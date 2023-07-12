@@ -1,10 +1,7 @@
 
 package jpql;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 public class JpaMain {
@@ -20,7 +17,13 @@ public class JpaMain {
 
             Member member = new Member();
             member.setUsername("lim");
+            member.setAge(18);
             em.persist(member);
+
+            Member result = em.createQuery("select m from Member m where m.username=:username", Member.class)
+                    .setParameter("username", "lim")
+                    .getSingleResult();
+            System.out.println("result = " + result.getAge());
 
             tx.commit();
 

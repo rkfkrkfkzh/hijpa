@@ -1,6 +1,7 @@
 package jpql;
 
 import javax.persistence.*;
+import java.io.LineNumberReader;
 
 @Entity
 @Table(name = "ORDERS")
@@ -14,4 +15,6 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
+
+
 }
