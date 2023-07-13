@@ -15,22 +15,22 @@ public class JpaMain {
         tx.begin();
         try {
 
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            Member member1 = new Member();
+            member1.setUsername("관리자1");
+            em.persist(member1);;
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setAge(28);
-            member.setType(MemberType.ADMIN);
-            member.setTeam(team);
-            em.persist(member);
-
+            Member member2 = new Member();
+            member2.setUsername("관리자2");
+            em.persist(member2);
 
             em.flush();
             em.clear();
-            String query = "select nullif(m.username,'member1') as username"+" from Member m";
+
+            //language=HQL
+            String query = "select group_concat(m.username) from Member m";
+
             List<String> resultList = em.createQuery(query, String.class).getResultList();
+
             for (String s : resultList) {
                 System.out.println("s = " + s);
 

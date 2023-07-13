@@ -65,3 +65,4 @@
 + NULLIF : 두 값이 같으면 null 반환, 다르면 첫번째 값 반환
   + 사용자 이름이 '관리자'면 null을 반환하고 나머지는 본인의 이름을 반환(아래참조)
   + select nullif(m.username, '관리자') from Member m
+---
