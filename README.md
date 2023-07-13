@@ -56,6 +56,12 @@
 ---
 ### 조건식 - CASE 식
 + 기본 CASE 식
-  + select case when m.age <= 10 then '학생요
-
-![스크린샷 2023-07-13 오후 9.24.51](./Desktop/스크린샷 2023-07-13 오후 9.24.51.png)
+<img width="512" alt="스크린샷 2023-07-13 오후 9 24 51" src="https://github.com/rkfkrkfkzh/jpashop/assets/86057607/455412ec-fb38-45f9-89d0-975451e5bfab">
++ 단순 CASE 식
+<img width="512" alt="스크린샷 2023-07-13 오후 9 31 10" src="https://github.com/rkfkrkfkzh/jpashop/assets/86057607/82302ba3-1df8-4913-aadd-69484bc4d120">
++ COALESCE : 하나씩 조회해서 null이 아니면 반환
+  + 사용자 이름이 없으면 이름 없는 회원을 반환(아래참조)
+  + select coalesce(m.username,'이름 없는 회원') from Member m
++ NULLIF : 두 값이 같으면 null 반환, 다르면 첫번째 값 반환
+  + 사용자 이름이 '관리자'면 null을 반환하고 나머지는 본인의 이름을 반환(아래참조)
+  + select nullif(m.username, '관리자') from Member m
