@@ -53,6 +53,9 @@
 + Boolean : TRUE, FALSE
 + ENUM : jpabook.MemberType.Admin(패키지명 포함)
 + 엔티티 타입 : TYPE(m) = Member (상속 관계에서 사용)
+---
+### 조건식 - CASE 식
++ 기본 CASE 식
+  + select case when m.age <= 10 then '학생요
 
-+ ![](../../../../var/folders/nk/3h97h_0j7mz8bpg19t1vtf3w0000gn/T/TemporaryItems/NSIRD_screencaptureui_smbfar/스크린샷 2023-07-13 오후 9.19.39.png)
-
+![스크린샷 2023-07-13 오후 9.24.51](./Desktop/스크린샷 2023-07-13 오후 9.24.51.png)
