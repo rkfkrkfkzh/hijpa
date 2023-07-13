@@ -40,6 +40,11 @@
 + 예) 회원과 팀을 조인하면서, 팀 이름이 A인 팀만 조인
   + JPQL : SELECT m, t FROM Member m LEFT JOIN m.team t on t.name = 'A'
   + SQL : SELECT m.*,t.* FROM Member m LEFT JOIN Team t ON m.TEAM_ID=t.id and t.name = 'A'
-
+---
+### JPA 서브 쿼리 한계
++ JPA는 WHERE, HAVING 절에서만 서브 쿼리 사용 가능
++ SELECT절도 가능(하이버네이트에서 지원)
++ FROM 절의 서브 쿼리는 현재 JPQL에서 불가능
+  + 조인으로 풀 수 있으면 풀어서 해결
   
 
