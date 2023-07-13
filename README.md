@@ -11,10 +11,10 @@
 ### 프로젝션
 + SELECT 절에 조회할 대상을 지정하는 것
 + 프로젝션 대상 : 엔티티, 임베디드 타입, 스칼라 타입(숫자, 문자등 기본 데이터 타입)
-+ SELECT m FROM Member m -> 엔티티 프로젝션
-+ SELECT m.team FROM Member m -> 엔티티 프로젝션
-+ SELECT m.address Member m -> 임베디드 타입 프로젝션
-+ SELECT m.username, m.age Member m -> 스칼라 타입 프로젝션
+  + SELECT m FROM Member m -> 엔티티 프로젝션
+  + SELECT m.team FROM Member m -> 엔티티 프로젝션
+  + SELECT m.address Member m -> 임베디드 타입 프로젝션
+  + SELECT m.username, m.age Member m -> 스칼라 타입 프로젝션
 + DISTINCT로 중복 제거
 ***
 ### 프로젝션 - 여러 값 조회
@@ -30,4 +30,16 @@
 + JPA는 페이징을 다음 두 API로 추상화
 + setFirstResult(int startPosition) : 조회 시작 위치(index)
 + setMaxResults(int maxResult) : 조회할 데이터 수
+---
+### 조인
++ 내부 조인 : SELECT m FROM Member m [INNER] JOIN m.team t
++ 외부 조인 : SELECT m FROM Member m LEFT [OUTER] JOIN m.team t
++ 세타 조인 : select count(m) from Member m, Team t where m.username = t.name
+---
+### 조인 대상 필터링
++ 예) 회원과 팀을 조인하면서, 팀 이름이 A인 팀만 조인
+  + JPQL : SELECT m, t FROM Member m LEFT JOIN m.team t on t.name = 'A'
+  + SQL : SELECT m.*,t.* FROM Member m LEFT JOIN Team t ON m.TEAM_ID=t.id and t.name = 'A'
+
+  
 
