@@ -17,28 +17,44 @@ public class JpaMain {
         tx.begin();
         try {
 
-            Team team = new Team();
-            em.persist(team);
+            Team teamA = new Team();
+            teamA.setName("팀A");
+            em.persist(teamA);
+
+            Team teamB = new Team();
+            teamB.setName("팀B");
+            em.persist(teamB);
 
             Member member1 = new Member();
-            member1.setUsername("관리자1");
-            member1.setTeam(team);
+            member1.setUsername("회원A");
+            member1.setTeam(teamA);
             em.persist(member1);
             ;
 
             Member member2 = new Member();
-            member2.setUsername("관리자2");
-            member2.setTeam(team);
+            member2.setUsername("회원B");
+            member2.setTeam(teamA);
             em.persist(member2);
+
+            Member member3 = new Member();
+            member3.setUsername("회원C");
+            member3.setTeam(teamB);
+            em.persist(member3);
 
             em.flush();
             em.clear();
 
-            //language=HQL
-            String query = "select m.username from Team t join t.members m"; // FROM절에서 명시적 조인을 통해 별칭을 얻으면 별칭을 통해 탐색가능
-
-            List<String> resultList = em.createQuery(query, String.class).getResultList();
-            System.out.println("resultList = " + resultList);
+            System.out.println("==============");
+            String query = "select distinct t from Team t join fetch t.members";
+            List<Team> resultList = em.createQuery(query, Team.class).getResultList();
+            System.out.println("resultList = " + resultList.size());
+            System.out.println("==============");
+            for (Team team : resultList) {
+                System.out.println("팀 = " + team.getName() + " 멤버 사이즈 = " + team.getMembers().size());
+                for (Member member : team.getMembers()) {
+                    System.out.println("멤버 = " + member);
+                }
+            }
             tx.commit();
 
         } catch (Exception e) {
