@@ -41,16 +41,12 @@ public class JpaMain {
             member3.setTeam(teamB);
             em.persist(member3);
 
-            em.flush();
+            int i = em.createQuery("update Member m set m.age=20").executeUpdate();
+
             em.clear();
+            Member member = em.find(Member.class, member1);
 
-            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
-                    .setParameter("username", "회원A")
-                    .getResultList();
-            for (Member member : resultList) {
-                System.out.println("member = " + member);
-
-            }
+            System.out.println("member.getAge() = " + member.getAge());
             tx.commit();
 
         } catch (Exception e) {
