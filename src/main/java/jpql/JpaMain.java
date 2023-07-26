@@ -45,23 +45,17 @@ public class JpaMain {
             em.clear();
 
             System.out.println("==========================================================================================================================================");
-            String query = "select t from Team t";
-            List<Team> resultList = em.createQuery(query, Team.class)
-                    .setFirstResult(0)
-                    .setMaxResults(2)
+            String query = "select m from Member m where m.team = :team";
+            List<Member> team = em.createQuery(query, Member.class)
+                    .setParameter("team", teamA)
                     .getResultList();
 
-            System.out.println("resultList 사이즈 = " + resultList.size());
-            System.out.println("resultList = " + resultList);
-            System.out.println("==========================================================================================================");
+            System.out.println("team = " + team);
 
-            for (Team team : resultList) {
-                System.out.println("team address = " + team + ", team = " + team.getName() + " 멤버 사이즈 = " + team.getMembers().size());
-                for (Member member : team.getMembers()) {
-                    System.out.println("멤버 = " + member);
-                }
+            for (Member member : team) {
+                System.out.println("member = " + member);
             }
-            System.out.println("==========================================================================================================");
+
             tx.commit();
 
         } catch (Exception e) {
