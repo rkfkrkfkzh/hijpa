@@ -44,17 +44,24 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            System.out.println("==============");
-            String query = "select distinct t from Team t join fetch t.members";
-            List<Team> resultList = em.createQuery(query, Team.class).getResultList();
-            System.out.println("resultList = " + resultList.size());
-            System.out.println("==============");
+            System.out.println("==========================================================================================================================================");
+            String query = "select t from Team t";
+            List<Team> resultList = em.createQuery(query, Team.class)
+                    .setFirstResult(0)
+                    .setMaxResults(2)
+                    .getResultList();
+
+            System.out.println("resultList 사이즈 = " + resultList.size());
+            System.out.println("resultList = " + resultList);
+            System.out.println("==========================================================================================================");
+
             for (Team team : resultList) {
-                System.out.println("팀 = " + team.getName() + " 멤버 사이즈 = " + team.getMembers().size());
+                System.out.println("team address = " + team + ", team = " + team.getName() + " 멤버 사이즈 = " + team.getMembers().size());
                 for (Member member : team.getMembers()) {
                     System.out.println("멤버 = " + member);
                 }
             }
+            System.out.println("==========================================================================================================");
             tx.commit();
 
         } catch (Exception e) {
